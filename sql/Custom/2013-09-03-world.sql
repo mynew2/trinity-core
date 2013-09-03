@@ -533,4 +533,4 @@ INSERT INTO `command` VALUES ('npcbot command', '7', null);
 INSERT INTO `command` VALUES ('npcbot juli', '7', null);
 INSERT INTO `command` VALUES ('npcbot helper', '7', null);
 INSERT INTO `command` VALUES ('mt', '7', null);
-INSERT INTO `command` VALUES ('npcbot npcbot', '7', null);
+INSERT INTO `command` VALUES ('npcbot', '7', null);
