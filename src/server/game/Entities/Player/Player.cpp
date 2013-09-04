@@ -3228,7 +3228,7 @@ void Player::InitTalentForLevel()
 {
     uint8 level = getLevel();
     // talents base at level diff (talents = level - 9 but some can be used already)
-    /*if (level < 10)
+    if (level < 10)
     {
         // Remove all talent points
         if (m_usedTalentCount > 0)                           // Free any used talents
@@ -3238,7 +3238,7 @@ void Player::InitTalentForLevel()
         }
     }
     else
-    {*/
+    {
         if (level < sWorld->getIntConfig(CONFIG_MIN_DUALSPEC_LEVEL) || m_specsCount == 0)
         {
             m_specsCount = 1;
@@ -3258,7 +3258,7 @@ void Player::InitTalentForLevel()
         // else update amount of free points
         else
             SetFreeTalentPoints(talentPointsForLevel - m_usedTalentCount);
-    //}
+    }
 
     if (!GetSession()->PlayerLoading())
         SendTalentsInfoData(false);                         // update at client
