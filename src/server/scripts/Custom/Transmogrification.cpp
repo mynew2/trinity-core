@@ -4,20 +4,20 @@ const char * Transmogrification::GetSlotName(uint8 slot, WorldSession* session) 
 {
     switch (slot)
     {
-    case EQUIPMENT_SLOT_HEAD      : return  session->GetTrinityString(LANG_SLOT_NAME_HEAD);// session->GetTrinityString(LANG_SLOT_NAME_HEAD);
-    case EQUIPMENT_SLOT_SHOULDERS : return  session->GetTrinityString(LANG_SLOT_NAME_SHOULDERS);// session->GetTrinityString(LANG_SLOT_NAME_SHOULDERS);
-    case EQUIPMENT_SLOT_BODY      : return  session->GetTrinityString(LANG_SLOT_NAME_BODY);// session->GetTrinityString(LANG_SLOT_NAME_BODY);
-    case EQUIPMENT_SLOT_CHEST     : return  session->GetTrinityString(LANG_SLOT_NAME_CHEST);// session->GetTrinityString(LANG_SLOT_NAME_CHEST);
-    case EQUIPMENT_SLOT_WAIST     : return  session->GetTrinityString(LANG_SLOT_NAME_WAIST);// session->GetTrinityString(LANG_SLOT_NAME_WAIST);
-    case EQUIPMENT_SLOT_LEGS      : return  session->GetTrinityString(LANG_SLOT_NAME_LEGS);// session->GetTrinityString(LANG_SLOT_NAME_LEGS);
-    case EQUIPMENT_SLOT_FEET      : return  session->GetTrinityString(LANG_SLOT_NAME_FEET);// session->GetTrinityString(LANG_SLOT_NAME_FEET);
-    case EQUIPMENT_SLOT_WRISTS    : return  session->GetTrinityString(LANG_SLOT_NAME_WRISTS);// session->GetTrinityString(LANG_SLOT_NAME_WRISTS);
-    case EQUIPMENT_SLOT_HANDS     : return  session->GetTrinityString(LANG_SLOT_NAME_HANDS);// session->GetTrinityString(LANG_SLOT_NAME_HANDS);
-    case EQUIPMENT_SLOT_BACK      : return  session->GetTrinityString(LANG_SLOT_NAME_BACK);// session->GetTrinityString(LANG_SLOT_NAME_BACK);
-    case EQUIPMENT_SLOT_MAINHAND  : return  session->GetTrinityString(LANG_SLOT_NAME_MAINHAND);// session->GetTrinityString(LANG_SLOT_NAME_MAINHAND);
-    case EQUIPMENT_SLOT_OFFHAND   : return  session->GetTrinityString(LANG_SLOT_NAME_OFFHAND);// session->GetTrinityString(LANG_SLOT_NAME_OFFHAND);
-    case EQUIPMENT_SLOT_RANGED    : return  session->GetTrinityString(LANG_SLOT_NAME_RANGED);// session->GetTrinityString(LANG_SLOT_NAME_RANGED);
-    case EQUIPMENT_SLOT_TABARD    : return  session->GetTrinityString(LANG_SLOT_NAME_TABARD);// session->GetTrinityString(LANG_SLOT_NAME_TABARD);
+    case EQUIPMENT_SLOT_HEAD      : return  session->GetTrinityString(11130);// session->GetTrinityString(LANG_SLOT_NAME_HEAD);
+    case EQUIPMENT_SLOT_SHOULDERS : return  session->GetTrinityString(11131);// session->GetTrinityString(LANG_SLOT_NAME_SHOULDERS);
+    case EQUIPMENT_SLOT_BODY      : return  session->GetTrinityString(11132);// session->GetTrinityString(LANG_SLOT_NAME_BODY);
+    case EQUIPMENT_SLOT_CHEST     : return  session->GetTrinityString(11133);// session->GetTrinityString(LANG_SLOT_NAME_CHEST);
+    case EQUIPMENT_SLOT_WAIST     : return  session->GetTrinityString(11134);// session->GetTrinityString(LANG_SLOT_NAME_WAIST);
+    case EQUIPMENT_SLOT_LEGS      : return  session->GetTrinityString(11135);// session->GetTrinityString(LANG_SLOT_NAME_LEGS);
+    case EQUIPMENT_SLOT_FEET      : return  session->GetTrinityString(11136);// session->GetTrinityString(LANG_SLOT_NAME_FEET);
+    case EQUIPMENT_SLOT_WRISTS    : return  session->GetTrinityString(11137);// session->GetTrinityString(LANG_SLOT_NAME_WRISTS);
+    case EQUIPMENT_SLOT_HANDS     : return  session->GetTrinityString(11138);// session->GetTrinityString(LANG_SLOT_NAME_HANDS);
+    case EQUIPMENT_SLOT_BACK      : return  session->GetTrinityString(11139);// session->GetTrinityString(LANG_SLOT_NAME_BACK);
+    case EQUIPMENT_SLOT_MAINHAND  : return  session->GetTrinityString(11140);// session->GetTrinityString(LANG_SLOT_NAME_MAINHAND);
+    case EQUIPMENT_SLOT_OFFHAND   : return  session->GetTrinityString(11141);// session->GetTrinityString(LANG_SLOT_NAME_OFFHAND);
+    case EQUIPMENT_SLOT_RANGED    : return  session->GetTrinityString(11142);// session->GetTrinityString(LANG_SLOT_NAME_RANGED);
+    case EQUIPMENT_SLOT_TABARD    : return  session->GetTrinityString(11143);// session->GetTrinityString(LANG_SLOT_NAME_TABARD);
     default: return NULL;
     }
 }
