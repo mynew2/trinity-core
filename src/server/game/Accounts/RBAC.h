@@ -678,6 +678,17 @@ enum RBACPermissions
     RBAC_PERM_COMMAND_MODIFY_CURRENCY                        = 775, // only 4.3.4
     RBAC_PERM_COMMAND_DEBUG_PHASE                            = 776, // Only 4.3.4
 
+	npcbot_info												= 9001,
+	npcbot_add												= 9000,
+	npcbot_fuhuo												= 9002,
+	npcbot_shan												= 9003,
+	npcbot_shuaxin												= 9004,
+	npcbot_command												= 9005,
+	npcbot_juli												= 9006,
+	npcbot_helper												= 9007,
+	mt												= 9008,
+	npcbot												= 9009,
+
     // custom permissions 1000+
     RBAC_PERM_MAX
 };
