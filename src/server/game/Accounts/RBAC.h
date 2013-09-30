@@ -791,8 +791,8 @@ class RBACGroup: public RBACObject
 class RBACData: public RBACObject
 {
     public:
-        RBACData(uint32 id, std::string const& name, int32 realmId):
-            RBACObject(id, name), _realmId(realmId) { }
+        RBACData(uint32 id, std::string const& name, int32 realmId, uint8 secLevel = 0):
+            RBACObject(id, name), _realmId(realmId), _secLevel(secLevel) { }
 
         /**
          * @name HasPermission
@@ -1016,12 +1016,24 @@ class RBACData: public RBACObject
 
         /// Loads all permissions, groups and roles assigned to current account
         void LoadFromDB();
+        
+         /// Sets security level
+        void SetSecurityLevel(uint8 id)
+        {
+            _secLevel = id;
+            LoadFromDB();
+        }
+
+        /// Returns the security level assigned
+        uint8 GetSecurityLevel() const { return _secLevel; }
     private:
         /// Saves a role to DB, Granted or Denied
         void SaveRole(uint32 role, bool granted, int32 realm);
         /// Saves a permission to DB, Granted or Denied
         void SavePermission(uint32 role, bool granted, int32 realm);
-
+        /// Clears roles, groups and permissions - Used for reload
+        void ClearData();
+        
         /**
          * @name CalculateNewPermissions
          * @brief Calculates new permissions
@@ -1036,6 +1048,7 @@ class RBACData: public RBACObject
         int32 GetRealmId() { return _realmId; }
 
         int32 _realmId;                                    ///> RealmId Affected
+        uint8 _secLevel;                                   ///> Account SecurityLevel
         RBACGroupContainer _groups;                        ///> Granted groups
         RBACRoleContainer _grantedRoles;                   ///> Granted roles
         RBACRoleContainer _deniedRoles;                    ///> Denied roles
