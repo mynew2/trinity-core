@@ -1202,8 +1202,6 @@ void WorldSession::HandleInspectOpcode(WorldPacket& recvData)
 
     TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: Received CMSG_INSPECT");
 
-    _player->SetSelection(guid);
-
     Player* player = ObjectAccessor::FindPlayer(guid);
     if (!player)
     {
