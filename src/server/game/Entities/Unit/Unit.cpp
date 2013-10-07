@@ -15986,10 +15986,12 @@ void Unit::RemoveVehicleKit()
     if (!m_vehicleKit)
         return;
 
-    m_vehicleKit->Uninstall();
-    delete m_vehicleKit;
-
+    Vehicle* vehicle = m_vehicleKit;
+    
     m_vehicleKit = NULL;
+
+    vehicle->Uninstall();
+    delete vehicle;
 
     m_updateFlag &= ~UPDATEFLAG_VEHICLE;
     m_unitTypeMask &= ~UNIT_MASK_VEHICLE;
