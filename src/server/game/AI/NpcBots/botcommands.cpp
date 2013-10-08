@@ -101,7 +101,7 @@ public:
 
         if (!*args)
         {
-            if (uint64 selection = handler->GetSession()->GetPlayer()->GetSelection())
+            if (uint64 selection = handler->GetSession()->GetPlayer()->GetTarget())
             {
                 if (group->IsMember(selection))
                 {
@@ -227,7 +227,7 @@ public:
     static bool HandleNpcBotInfoCommand(ChatHandler* handler, const char* /*args*/)
     {
         Player* owner = handler->GetSession()->GetPlayer();
-        if (!owner->GetSelection())
+        if (!owner->GetTarget())
         {
             handler->PSendSysMessage(".npcbot info");
             handler->PSendSysMessage("Lists NpcBots count of each class owned by selected player. You can use this on self and your party memebers");
@@ -385,7 +385,7 @@ public:
     static bool HandleNpcBotRemoveCommand(ChatHandler* handler, const char* /*args*/)
     {
         Player* owner = handler->GetSession()->GetPlayer();
-        uint64 guid = owner->GetSelection();
+        uint64 guid = owner->GetTarget();
         if (!guid)
         {
             handler->PSendSysMessage(".npcbot shan");
@@ -447,7 +447,7 @@ public:
         Player* owner = handler->GetSession()->GetPlayer();
         Player* master = NULL;
         bool all = false;
-        uint64 guid = owner->GetSelection();
+        uint64 guid = owner->GetTarget();
         if (!guid)
         {
             handler->PSendSysMessage(".npcbot shuaxin");
@@ -539,7 +539,7 @@ public:
     static bool HandleNpcBotAddCommand(ChatHandler* handler, const char* args)
     {
         Player* owner = handler->GetSession()->GetPlayer();
-        uint64 sel = owner->GetSelection();
+        uint64 sel = owner->GetTarget();
         if (!*args || sel != owner->GetGUID())
         {
             handler->PSendSysMessage(".npcbot add");
