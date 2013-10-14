@@ -232,7 +232,7 @@ class boss_eadric : public CreatureScript
                 for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
                 {
                      if(itr->GetSource() && itr->GetSource()->IsAlive() && !itr->GetSource()->IsGameMaster())
-                        return; //se almeno un player ¨¨ vivo, esce						
+                        return; //se almeno un player ¡§¡§ vivo, esce						
                 }
                 
                 if(instance)
@@ -408,7 +408,7 @@ class boss_paletress : public CreatureScript
                 for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
                 {
                     if(itr->GetSource() && itr->GetSource()->IsAlive() && !itr->GetSource()->IsGameMaster())
-                       return; //se almeno un player ¨¨ vivo, esce						
+                       return; //se almeno un player ¡§¡§ vivo, esce						
                 }
     			 
                 if(pInstance)

@@ -46,10 +46,8 @@
 #include "World.h"
 #include "WorldPacket.h"
 #include "WorldSession.h"
+#include "HookMgr.h"
 
-
-//bot
-#include "Config.h"
 
 class LoginQueryHolder : public SQLQueryHolder
 {
@@ -247,7 +245,7 @@ void WorldSession::HandleCharEnum(PreparedQueryResult result)
 void WorldSession::HandleCharEnumOpcode(WorldPacket & /*recvData*/)
 {
     AntiDOS.AllowOpcode(CMSG_CHAR_ENUM, false);
-    
+
     // remove expired bans
     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_EXPIRED_BANS);
     CharacterDatabase.Execute(stmt);
@@ -761,7 +759,7 @@ void WorldSession::HandleCharDeleteOpcode(WorldPacket& recvData)
     WorldPacket data(SMSG_CHAR_DELETE, 1);
     data << uint8(CHAR_DELETE_SUCCESS);
     SendPacket(&data);
-    
+
     AntiDOS.AllowOpcode(CMSG_CHAR_ENUM, true);
 }
 
@@ -1007,6 +1005,10 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
         pCurrChar->SendTalentsInfoData(false);              // original talents send already in to SendInitialPacketsBeforeAddToMap, resend reset state
         SendNotification(LANG_RESET_TALENTS);
     }
+#ifdef ELUNA
+    if (pCurrChar->HasAtLoginFlag(AT_LOGIN_FIRST))
+        sHookMgr->OnFirstLogin(pCurrChar);
+#endif
 
     if (pCurrChar->HasAtLoginFlag(AT_LOGIN_FIRST))
         pCurrChar->RemoveAtLoginFlag(AT_LOGIN_FIRST);
@@ -1029,28 +1031,6 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
         pCurrChar->SetStandState(UNIT_STAND_STATE_STAND);
 
     m_playerLoading = false;
-
-    //the only place where we check if it has NPC bots
-    if (sConfigMgr->GetBoolDefault("Bot.EnableNpcBots", true))
-    {
-        if (QueryResult result = CharacterDatabase.PQuery("SELECT entry,race,class,istank FROM `character_npcbot` WHERE `owner` = '%u'", pCurrChar->GetGUIDLow()))
-        {
-            uint32 m_bot_entry = 0;
-            uint8 m_bot_race = 0;
-            uint8 m_bot_class = 0;
-            uint8 Tank = 0;
-            do
-            {
-                Field* fields = result->Fetch();
-                m_bot_entry = fields[0].GetUInt32();
-                m_bot_race = fields[1].GetUInt8();
-                m_bot_class = fields[2].GetInt8();
-                Tank = fields[3].GetInt8();
-                if (m_bot_entry && m_bot_race && m_bot_class)
-                    pCurrChar->SetBotMustBeCreated(m_bot_entry, m_bot_race, m_bot_class, bool(Tank));
-            } while (result->NextRow());
-        }
-    }
 
     sScriptMgr->OnPlayerLogin(pCurrChar);
     delete holder;

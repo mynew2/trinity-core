@@ -47,7 +47,6 @@ void AddSC_SmartSCripts();
 void AddSC_account_commandscript();
 void AddSC_achievement_commandscript();
 void AddSC_arena_commandscript();
-void AddSC_ah_bot_commandscript();
 void AddSC_ban_commandscript();
 void AddSC_bf_commandscript();
 void AddSC_cast_commandscript();
@@ -377,6 +376,7 @@ void AddSC_ungoro_crater();
 void AddSC_winterspring();
 
 // Northrend
+
 void AddSC_boss_slad_ran();
 void AddSC_boss_moorabi();
 void AddSC_boss_drakkari_colossus();
@@ -522,7 +522,6 @@ void AddSC_boss_lich_king_hr();
 void AddSC_boss_lord_marrowgar();       // Icecrown Citadel
 void AddSC_boss_lady_deathwhisper();
 void AddSC_boss_deathbringer_saurfang();
-void AddSC_boss_gunship_battle();
 void AddSC_boss_festergut();
 void AddSC_boss_rotface();
 void AddSC_boss_professor_putricide();
@@ -734,7 +733,6 @@ void AddCommandScripts()
     AddSC_account_commandscript();
     AddSC_achievement_commandscript();
     AddSC_arena_commandscript();
-    AddSC_ah_bot_commandscript();
     AddSC_ban_commandscript();
     AddSC_bf_commandscript();
     AddSC_cast_commandscript();
@@ -837,8 +835,8 @@ void AddEasternKingdomsScripts()
     AddSC_boss_nefarian();
     AddSC_instance_blackwing_lair();
     AddSC_deadmines();                      //Deadmines
-    AddSC_instance_deadmines();
     AddSC_boss_mr_smite();
+    AddSC_instance_deadmines();
     AddSC_gnomeregan();                     //Gnomeregan
     AddSC_instance_gnomeregan();
     AddSC_boss_attumen();                   //Karazhan
@@ -1094,14 +1092,14 @@ void AddOutlandScripts()
     AddSC_boss_talon_king_ikiss();
     AddSC_boss_anzu();
     AddSC_instance_sethekk_halls();
-    
+
     // Auchindoun - Shadow Labyrinth
     AddSC_boss_ambassador_hellmaw();
     AddSC_boss_blackheart_the_inciter();
     AddSC_boss_grandmaster_vorpil();
     AddSC_boss_murmur();
     AddSC_instance_shadow_labyrinth();
-    
+
     AddSC_black_temple();                   //Black Temple
     AddSC_boss_illidan();
     AddSC_boss_shade_of_akama();
@@ -1189,15 +1187,15 @@ void AddNorthrendScripts()
     AddSC_boss_gal_darah();
     AddSC_boss_eck();
     AddSC_instance_gundrak();
-    
+
     // Azjol-Nerub - Ahn'kahet
     AddSC_boss_elder_nadox();
-     AddSC_boss_taldaram();
+    AddSC_boss_taldaram();
     AddSC_boss_amanitar();
     AddSC_boss_jedoga_shadowseeker();
     AddSC_boss_volazj();
     AddSC_instance_ahnkahet();
-    
+
     // Azjol-Nerub - Azjol-Nerub
     AddSC_boss_krik_thir();
     AddSC_boss_hadronox();
@@ -1280,7 +1278,7 @@ void AddNorthrendScripts()
     AddSC_boss_yoggsaron();
     AddSC_boss_algalon();
     AddSC_instance_ulduar();
-    
+
     // Utgarde Keep - Utgarde Keep
     AddSC_boss_keleseth();
     AddSC_boss_skarvald_dalronn();
@@ -1294,14 +1292,14 @@ void AddNorthrendScripts()
     AddSC_boss_skadi();
     AddSC_boss_ymiron();
     AddSC_instance_utgarde_pinnacle();
-    
+
     // Vault of Archavon
     AddSC_boss_archavon();
     AddSC_boss_emalon();
     AddSC_boss_koralon();
     AddSC_boss_toravon();
     AddSC_instance_vault_of_archavon();
-    
+
     AddSC_boss_cyanigosa();             //Violet Hold
     AddSC_boss_erekem();
     AddSC_boss_ichoron();
@@ -1328,7 +1326,6 @@ void AddNorthrendScripts()
     AddSC_boss_lord_marrowgar();        // Icecrown Citadel
     AddSC_boss_lady_deathwhisper();
     AddSC_boss_deathbringer_saurfang();
-    AddSC_boss_gunship_battle();
     AddSC_boss_festergut();
     AddSC_boss_rotface();
     AddSC_boss_professor_putricide();
@@ -1401,17 +1398,6 @@ void AddBattlegroundScripts()
 
 #ifdef SCRIPTS
 /* This is where custom scripts' loading functions should be declared. */
-//Bots
-void AddSC_druid_bot();
-void AddSC_hunter_bot();
-void AddSC_mage_bot();
-void AddSC_paladin_bot();
-void AddSC_priest_bot();
-void AddSC_rogue_bot();
-void AddSC_shaman_bot();
-void AddSC_warlock_bot();
-void AddSC_warrior_bot();
-void AddSC_script_bot_commands();
 void AddSC_CPWS_Transmogrification();
 #endif
 
@@ -1419,17 +1405,7 @@ void AddCustomScripts()
 {
 #ifdef SCRIPTS
     /* This is where custom scripts should be added. */
-    //Bots
-    AddSC_druid_bot();
-    AddSC_hunter_bot();
-    AddSC_mage_bot();
-    AddSC_paladin_bot();
-    AddSC_priest_bot();
-    AddSC_rogue_bot();
-    AddSC_shaman_bot();
-    AddSC_warlock_bot();
-    AddSC_warrior_bot();
-    AddSC_script_bot_commands();
+
 AddSC_CPWS_Transmogrification();
 #endif
 }

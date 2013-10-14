@@ -600,11 +600,4 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     PrepareStatement(CHAR_UPD_CHAR_PET_SLOT_BY_ID, "UPDATE character_pet SET slot = ? WHERE owner = ? AND id = ?", CONNECTION_ASYNC);
     PrepareStatement(CHAR_DEL_CHAR_PET_BY_ID, "DELETE FROM character_pet WHERE id = ?", CONNECTION_ASYNC);
     PrepareStatement(CHAR_DEL_CHAR_PET_BY_SLOT, "DELETE FROM character_pet WHERE owner = ? AND (slot = ? OR slot > ?)", CONNECTION_ASYNC);
-
-    // Bot
-    PrepareStatement(CHAR_DEL_NPCBOT, "DELETE FROM character_npcbot WHERE owner = ? AND entry = ?", CONNECTION_ASYNC);
-    PrepareStatement(CHAR_DEL_NPCBOTS, "DELETE FROM character_npcbot WHERE owner = ?", CONNECTION_ASYNC);
-    PrepareStatement(CHAR_INS_NPCBOT, "INSERT INTO character_npcbot (owner, entry, race, class, istank) VALUES (?, ?, ?, ?, ?)", CONNECTION_ASYNC);
-    PrepareStatement(CHAR_SEL_MAINTANK, "SELECT memberGuid, memberFlags FROM group_member WHERE guid = ?", CONNECTION_SYNCH);
-    PrepareStatement(CHAR_UPD_NPCBOT_TANK, "UPDATE character_npcbot SET istank = ? WHERE owner = ? AND entry = ?", CONNECTION_ASYNC);
 }

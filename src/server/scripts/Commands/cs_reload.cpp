@@ -41,6 +41,7 @@ EndScriptData */
 #include "TicketMgr.h"
 #include "WardenCheckMgr.h"
 #include "WaypointManager.h"
+#include "LuaEngine.h"
 
 class reload_commandscript : public CommandScript
 {
@@ -65,6 +66,7 @@ public:
             { "",            rbac::RBAC_PERM_COMMAND_RELOAD_ALL,             true,  &HandleReloadAllCommand,           "", NULL },
             { NULL,          0,                  false, NULL,                              "", NULL }
         };
+
         static ChatCommand reloadCommandTable[] =
         {
             { "auctions",                      rbac::RBAC_PERM_COMMAND_RELOAD_AUCTIONS, true,  &HandleReloadAuctionsCommand,                   "", NULL },
@@ -159,6 +161,7 @@ public:
             { "waypoint_data",                 rbac::RBAC_PERM_COMMAND_RELOAD_WAYPOINT_DATA, true,  &HandleReloadWpCommand,                         "", NULL },
             { "vehicle_accessory",             rbac::RBAC_PERM_COMMAND_RELOAD_VEHICLE_ACCESORY, true,  &HandleReloadVehicleAccessoryCommand,           "", NULL },
             { "vehicle_template_accessory",    rbac::RBAC_PERM_COMMAND_RELOAD_VEHICLE_TEMPLATE_ACCESSORY, true,  &HandleReloadVehicleTemplateAccessoryCommand,   "", NULL },
+            { "eluna",                         rbac::RBAC_PERM_COMMAND_RELOAD_ELUNA, true, &HandleReloadElunaLuaEngine, "", NULL },
             { NULL,                            0,                          false, NULL,                                           "", NULL }
         };
         static ChatCommand commandTable[] =
@@ -1242,6 +1245,17 @@ public:
         TC_LOG_INFO(LOG_FILTER_GENERAL, "Reloading vehicle_template_accessory table...");
         sObjectMgr->LoadVehicleTemplateAccessories();
         handler->SendGlobalGMSysMessage("Vehicle template accessories reloaded.");
+        return true;
+    }
+
+    static bool HandleReloadElunaLuaEngine(ChatHandler* handler, const char* /*args*/)
+    {
+#ifdef ELUNA
+        sEluna->StartEluna(true);
+        handler->SendSysMessage("Reloaded Eluna Lua Engine");
+#else
+        handler->PSendSysMessage("Eluna Lua Engine is not enabled");
+#endif
         return true;
     }
 

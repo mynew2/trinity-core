@@ -37,11 +37,6 @@ class Player;
 class SpellInfo;
 class WorldSession;
 
-// npcbot
-class bot_ai;
-class bot_minion_ai;
-class bot_pet_ai;
-
 enum CreatureFlagsExtra
 {
     CREATURE_FLAG_EXTRA_INSTANCE_BIND   = 0x00000001,       // creature kill bind instance with killer and killer's group
@@ -707,37 +702,11 @@ class Creature : public Unit, public GridObject<Creature>, public MapCreature
         void FarTeleportTo(Map* map, float X, float Y, float Z, float O);
 
         bool m_isTempWorldObject; //true when possessed
-        
+
         // Handling caster facing during spellcast
         void SetTarget(uint64 guid);
         void FocusTarget(Spell const* focusSpell, WorldObject const* target);
         void ReleaseFocus(Spell const* focusSpell);
-
-        //Bot commands
-        Player* GetBotOwner() const { return m_bot_owner; }
-        void SetBotOwner(Player* newowner) { m_bot_owner = newowner; }
-        Creature* GetCreatureOwner() const { return m_creature_owner; }
-        void SetCreatureOwner(Creature* newCreOwner) { m_creature_owner = newCreOwner; } 
-        Creature* GetBotsPet() const { return m_bots_pet; }
-        void SetBotsPetDied();
-        void SetBotsPet(Creature* newpet) { /*ASSERT (!m_bots_pet);*/ m_bots_pet = newpet; }
-        void SetIAmABot(bool bot = true);
-        bool GetIAmABot() const;
-        bool GetIAmABotsPet() const;
-        void SetBotClass(uint8 myclass) { m_bot_class = myclass; }
-        uint8 GetBotClass() const { return m_bot_class; }
-        void SetBotTank(Unit* newtank);
-        bot_ai* GetBotAI() const { return bot_AI; }
-        bot_minion_ai* GetBotMinionAI() const;
-        bot_pet_ai* GetBotPetAI() const;
-        void InitBotAI(bool asPet = false);
-        void SetBotCommandState(CommandStates st, bool force = false);
-        void ApplyBotDamageMultiplierMelee(uint32& damage, CalcDamageInfo& damageinfo) const;
-        void ApplyBotDamageMultiplierMelee(int32& damage, SpellNonMeleeDamage& damageinfo, SpellInfo const* spellInfo, WeaponAttackType attackType, bool& crit) const;
-        void ApplyBotDamageMultiplierSpell(int32& damage, SpellNonMeleeDamage& damageinfo, SpellInfo const* spellInfo, WeaponAttackType attackType, bool& crit) const;
-        void SetBotShouldUpdateStats();
-        void OnBotSummon(Creature* summon);
-        //Bot commands
 
     protected:
         bool CreateFromProto(uint32 guidlow, uint32 Entry, uint32 vehId, uint32 team, const CreatureData* data = NULL);
@@ -789,14 +758,6 @@ class Creature : public Unit, public GridObject<Creature>, public MapCreature
         bool IsInvisibleDueToDespawn() const;
         bool CanAlwaysSee(WorldObject const* obj) const;
     private:
-        //bot system
-        Player* m_bot_owner;
-        Creature* m_creature_owner;
-        Creature* m_bots_pet;
-        bot_ai* bot_AI;
-        uint8 m_bot_class;
-        //end bot system
-
         void ForcedDespawn(uint32 timeMSToDespawn = 0);
 
         //WaypointMovementGenerator vars
@@ -806,7 +767,7 @@ class Creature : public Unit, public GridObject<Creature>, public MapCreature
         //Formation var
         CreatureGroup* m_formation;
         bool TriggerJustRespawned;
-        
+
         Spell const* _focusSpell;   ///> Locks the target during spell cast for proper facing
 };
 

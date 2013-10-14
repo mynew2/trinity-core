@@ -37,9 +37,7 @@
 #include "ScriptMgr.h"
 #include "CreatureAI.h"
 #include "SpellInfo.h"
-
-//Bot
-#include "bothelper.h"
+#include "HookMgr.h"
 
 enum StableResultCode
 {
@@ -298,19 +296,6 @@ void WorldSession::HandleGossipHelloOpcode(WorldPacket& recvData)
     uint64 guid;
     recvData >> guid;
 
-    //Bot
-    if (guid == _player->GetGUID())
-    {
-        if (!_player->GetBotHelper())
-        {
-            TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "WORLD: HandleGossipSelectOptionOpcode - Player (GUID: %u) do not have a helper on gossip hello.", uint32(GUID_LOPART(guid)));
-            return;
-        }
-        _player->GetBotHelper()->OnGossipHello(_player);
-        return;
-    }
-    //end Bot
-
     Creature* unit = GetPlayer()->GetNPCIfCanInteractWith(guid, UNIT_NPC_FLAG_NONE);
     if (!unit)
     {
@@ -412,6 +397,10 @@ void WorldSession::HandleSpiritHealerActivateOpcode(WorldPacket& recvData)
     // remove fake death
     if (GetPlayer()->HasUnitState(UNIT_STATE_DIED))
         GetPlayer()->RemoveAurasByType(SPELL_AURA_FEIGN_DEATH);
+
+#ifdef ELUNA
+    sHookMgr->OnResurrect(GetPlayer());
+#endif
 
     SendSpiritResurrect();
 }

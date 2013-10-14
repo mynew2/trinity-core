@@ -471,7 +471,7 @@ LfgCompatibility LFGQueue::CheckCompatibility(LfgGuidList check)
     }
 
     // Enough players?
-    if (numPlayers != 2)
+    if (numPlayers != MAXGROUPSIZE)
     {
         TC_LOG_DEBUG(LOG_FILTER_LFG, "LFGQueue::CheckCompatibility: (%s) Compatibles but not enough players(%u)", strGuids.c_str(), numPlayers);
         LfgCompatibilityData data(LFG_COMPATIBLES_WITH_LESS_PLAYERS);

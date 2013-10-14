@@ -1862,39 +1862,6 @@ class spell_q2118_The_plague_spread : public SpellScriptLoader
         }
 };
 
-class spell_q13086_cannons_target : public SpellScriptLoader
-{
-    public:
-        spell_q13086_cannons_target() : SpellScriptLoader("spell_q13086_cannons_target") { }
-
-        class spell_q13086_cannons_target_SpellScript : public SpellScript
-        {
-            PrepareSpellScript(spell_q13086_cannons_target_SpellScript);
-
-            bool Validate(SpellInfo const* spellInfo) OVERRIDE
-            {
-                if (!sSpellMgr->GetSpellInfo(spellInfo->Effects[EFFECT_0].CalcValue()))
-                    return false;
-                return true;
-            }
-
-            void HandleEffectDummy(SpellEffIndex /*effIndex*/)
-            {
-                if (WorldLocation const* pos = GetExplTargetDest())
-                    GetCaster()->CastSpell(pos->GetPositionX(), pos->GetPositionY(), pos->GetPositionZ(), GetEffectValue(), true);
-            }
-
-            void Register() OVERRIDE
-            {
-                OnEffectHit += SpellEffectFn(spell_q13086_cannons_target_SpellScript::HandleEffectDummy, EFFECT_0, SPELL_EFFECT_DUMMY);
-            }
-        };
-
-        SpellScript* GetSpellScript() const OVERRIDE
-        {
-            return new spell_q13086_cannons_target_SpellScript();
-        }
-};
 
 enum BearFlankMaster
 {
@@ -1953,6 +1920,40 @@ class spell_q13011_bear_flank_master : public SpellScriptLoader
         }
 };
 
+class spell_q13086_cannons_target : public SpellScriptLoader
+{
+    public:
+        spell_q13086_cannons_target() : SpellScriptLoader("spell_q13086_cannons_target") { }
+
+        class spell_q13086_cannons_target_SpellScript : public SpellScript
+        {
+            PrepareSpellScript(spell_q13086_cannons_target_SpellScript);
+
+            bool Validate(SpellInfo const* spellInfo) OVERRIDE
+            {
+                if (!sSpellMgr->GetSpellInfo(spellInfo->Effects[EFFECT_0].CalcValue()))
+                    return false;
+                return true;
+            }
+
+            void HandleEffectDummy(SpellEffIndex /*effIndex*/)
+            {
+                if (WorldLocation const* pos = GetExplTargetDest())
+                    GetCaster()->CastSpell(pos->GetPositionX(), pos->GetPositionY(), pos->GetPositionZ(), GetEffectValue(), true);
+            }
+
+            void Register() OVERRIDE
+            {
+                OnEffectHit += SpellEffectFn(spell_q13086_cannons_target_SpellScript::HandleEffectDummy, EFFECT_0, SPELL_EFFECT_DUMMY);
+            }
+        };
+
+        SpellScript* GetSpellScript() const OVERRIDE
+        {
+            return new spell_q13086_cannons_target_SpellScript();
+        }
+};
+
 enum BurstAtTheSeams
 {
     NPC_DRAKKARI_CHIEFTAINK                 = 29099,
@@ -1972,13 +1973,13 @@ enum BurstAtTheSeams
 
 class spell_q12690_burst_at_the_seams : public SpellScriptLoader
 {
-
     public:
         spell_q12690_burst_at_the_seams() : SpellScriptLoader("spell_q12690_burst_at_the_seams") { }
+
         class spell_q12690_burst_at_the_seams_SpellScript : public SpellScript
         {
             PrepareSpellScript(spell_q12690_burst_at_the_seams_SpellScript);
-            
+
             bool Validate(SpellInfo const* /*spellInfo*/) OVERRIDE
             {
                 if (!sSpellMgr->GetSpellInfo(SPELL_BURST_AT_THE_SEAMS)
@@ -1990,12 +1991,12 @@ class spell_q12690_burst_at_the_seams : public SpellScriptLoader
                     return false;
                 return true;
             }
-            
+
             bool Load() OVERRIDE
             {
                 return GetCaster()->GetTypeId() == TYPEID_UNIT;
             }
-           
+
             void HandleKnockBack(SpellEffIndex /*effIndex*/)
             {
                 if (Unit* creature = GetHitCreature())
@@ -2021,8 +2022,7 @@ class spell_q12690_burst_at_the_seams : public SpellScriptLoader
                     }
                 }
             }
-            
-            
+
             void HandleScript(SpellEffIndex /*effIndex*/)
             {
                 GetCaster()->ToCreature()->DespawnOrUnsummon(2 * IN_MILLISECONDS);
@@ -2045,72 +2045,73 @@ enum EscapeFromSilverbrook
 {
     SPELL_SUMMON_WORGEN = 48681
 };
- 
+
 // 48682 - Escape from Silverbrook - Periodic Dummy
 class spell_q12308_escape_from_silverbrook : public SpellScriptLoader
 {
     public:
         spell_q12308_escape_from_silverbrook() : SpellScriptLoader("spell_q12308_escape_from_silverbrook") { }
- 
+
         class spell_q12308_escape_from_silverbrook_SpellScript : public SpellScript
         {
             PrepareSpellScript(spell_q12308_escape_from_silverbrook_SpellScript);
- 
+
             bool Validate(SpellInfo const* /*spellInfo*/) OVERRIDE
             {
                 if (!sSpellMgr->GetSpellInfo(SPELL_SUMMON_WORGEN))
                     return false;
                 return true;
             }
- 
+
             void HandleDummy(SpellEffIndex /*effIndex*/)
             {
                 GetCaster()->CastSpell(GetCaster(), SPELL_SUMMON_WORGEN, true);
             }
- 
+
             void Register() OVERRIDE
             {
                 OnEffectHit += SpellEffectFn(spell_q12308_escape_from_silverbrook_SpellScript::HandleDummy, EFFECT_0, SPELL_EFFECT_DUMMY);
             }
         };
- 
+
         SpellScript* GetSpellScript() const OVERRIDE
         {
             return new spell_q12308_escape_from_silverbrook_SpellScript();
         }
 };
- 
+
 // 48681 - Summon Silverbrook Worgen
 class spell_q12308_escape_from_silverbrook_summon_worgen : public SpellScriptLoader
 {
     public:
         spell_q12308_escape_from_silverbrook_summon_worgen() : SpellScriptLoader("spell_q12308_escape_from_silverbrook_summon_worgen") { }
- 
+
         class spell_q12308_escape_from_silverbrook_summon_worgen_SpellScript : public SpellScript
         {
             PrepareSpellScript(spell_q12308_escape_from_silverbrook_summon_worgen_SpellScript);
- 
+
             void ModDest(SpellEffIndex effIndex)
             {
                 float dist = GetSpellInfo()->Effects[effIndex].CalcRadius(GetCaster());
                 float angle = (urand(0, 1) ? -1 : 1) * (frand(0.75f, 1.0f) * M_PI);
- 
+
                 Position pos;
                 GetCaster()->GetNearPosition(pos, dist, angle);
                 GetHitDest()->Relocate(&pos);
             }
- 
+
             void Register() OVERRIDE
             {
                 OnEffectHit += SpellEffectFn(spell_q12308_escape_from_silverbrook_summon_worgen_SpellScript::ModDest, EFFECT_0, SPELL_EFFECT_SUMMON);
             }
         };
- 
+
         SpellScript* GetSpellScript() const OVERRIDE
         {
             return new spell_q12308_escape_from_silverbrook_summon_worgen_SpellScript();
         }
 };
+
 
 enum DeathComesFromOnHigh
 {

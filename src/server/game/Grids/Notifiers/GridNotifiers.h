@@ -894,6 +894,7 @@ namespace Trinity
             {
                 if (G3D::fuzzyEq(_range, 0))
                     return false;
+
                 if (_raid)
                 {
                     if (!_refUnit->IsInRaidWith(u))

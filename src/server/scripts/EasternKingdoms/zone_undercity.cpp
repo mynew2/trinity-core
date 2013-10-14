@@ -69,7 +69,7 @@ float HighborneLoc[4][3]=
     {1292.51f, 310.50f, 1.99f},
 };
 
-#define HIGHBORNE_LOC_Y             -65.00f
+#define HIGHBORNE_LOC_Y             -61.00f
 #define HIGHBORNE_LOC_Y_NEW         -55.50f
 
 class npc_lady_sylvanas_windrunner : public CreatureScript
@@ -132,7 +132,7 @@ public:
             {
                 if (Creature* target = Unit::GetCreature(*summoned, targetGUID))
                 {
-                    target->MonsterMoveWithSpeed(target->GetPositionX(), target->GetPositionY(), me->GetPositionZ()+15, target->GetDistance(target->GetPositionX(), target->GetPositionY(), me->GetPositionZ()+15) / (5000 * 0.001f));
+                    target->MonsterMoveWithSpeed(target->GetPositionX(), target->GetPositionY(), me->GetPositionZ()+15.0f, 0);
                     target->SetPosition(target->GetPositionX(), target->GetPositionY(), me->GetPositionZ()+15.0f, 0.0f);
                     summoned->CastSpell(target, SPELL_RIBBON_OF_SOULS, false);
                 }

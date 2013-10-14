@@ -192,25 +192,6 @@ class CharacterCreateInfo
         uint8 CharCount;
 };
 
-//npcbot
-struct NpcBotMap
-{
-    friend class Player;
-    protected:
-        NpcBotMap() : m_guid(0), m_entry(0), m_race(0), m_class(0), m_creature(NULL), m_reviveTimer(0), tank(false) {}
-        uint64 m_guid;
-        uint32 m_entry;
-        uint8  m_race;
-        uint8  m_class;
-        Creature* m_creature;
-        uint32 m_reviveTimer;
-        bool tank;
-    public:
-        uint64 _Guid() const { return m_guid; }
-        Creature* _Cre() const { return m_creature; }
-};
-//end bot mods
-
 /// Player session in the World
 class WorldSession
 {
@@ -943,10 +924,8 @@ class WorldSession
             friend class World;
             public:
                 DosProtection(WorldSession* s) : Session(s), _policy((Policy)sWorld->getIntConfig(CONFIG_PACKET_SPOOF_POLICY)) {}
-
                 bool EvaluateOpcode(WorldPacket& p) const;
                 void AllowOpcode(uint16 opcode, bool allow) { _isOpcodeAllowed[opcode] = allow; }
-
             protected:
                 enum Policy
                 {
@@ -970,8 +949,6 @@ class WorldSession
                 typedef UNORDERED_MAP<uint16, bool> OpcodeStatusMap;
                 OpcodeStatusMap _isOpcodeAllowed; // could be bool array, but wouldn't be practical for game versions with non-linear opcodes
                 Policy _policy;
-
-                
         } AntiDOS;
 
     private:

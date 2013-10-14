@@ -678,17 +678,11 @@ enum RBACPermissions
     RBAC_PERM_COMMAND_WP_UNLOAD                              = 772,
     RBAC_PERM_COMMAND_WP_RELOAD                              = 773,
     RBAC_PERM_COMMAND_WP_SHOW                                = 774,
-
-	npcbot_info												= 9001,
-	npcbot_add												= 9000,
-	npcbot_fuhuo												= 9002,
-	npcbot_shan												= 9003,
-	npcbot_shuaxin												= 9004,
-	npcbot_command												= 9005,
-	npcbot_juli												= 9006,
-	npcbot_helper												= 9007,
-	mt												= 9008,
-	npcbot												= 9009,
+	
+    /* Eluna */
+#ifdef ELUNA
+    RBAC_PERM_COMMAND_RELOAD_ELUNA                           = 900,
+#endif
 
     // custom permissions 1000+
     RBAC_PERM_MAX
@@ -735,7 +729,7 @@ class RBACPermission
  * @brief Contains all needed information about the acccount
  *
  * This class contains all the data needed to calculate the account permissions.
-* RBACDAta is formed by granted and denied permissions and all the inherited permissions
+ * RBACDAta is formed by granted and denied permissions and all the inherited permissions
  *
  * Calculation of current Permissions: Granted permissions - Denied permissions
  * - Granted permissions: through linked permissions and directly assigned
@@ -780,76 +774,6 @@ class RBACData
         RBACPermissionContainer const& GetGrantedPermissions() const { return _grantedPerms; }
         /// Returns all the denied permissions
         RBACPermissionContainer const& GetDeniedPermissions() const { return _deniedPerms; }
-
-        /**
-         * @name GrantRole
-         * @brief Grants a role
-         *
-         * Grants a role to the account. If realm is 0 or the role can not be added
-         * No save to db action will be performed.
-         *
-         * Fails if role Id does not exists or role already granted or denied
-         *
-         * @param roleId role to be granted
-         * @param realmId realm affected
-         *
-         * @return Success or failure (with reason) to grant the role
-         *
-         * Example Usage:
-         * // previously defined "RBACData* rbac" with proper initialization
-         * uint32 roleId = 2;
-         * if (rbac->GrantRole(roleId) == RBAC_IN_DENIED_LIST)
-         *     TC_LOG_DEBUG(LOG_FILTER_PLAYER, "Failed to grant role %u, already denied", roleId);
-         * @endcode
-         */
-        RBACCommandResult GrantRole(uint32 roleId, int32 realmId = 0);
-
-        /**
-         * @name DenyRole
-         * @brief Denies a role
-         *
-         * Denied a role to the account. If realm is 0 or the role can not be added
-         * No save to db action will be performed.
-         *
-         * Fails if role Id does not exists or role already granted or denied
-         *
-         * @param roleId role to be denied
-         * @param realmId realm affected
-         *
-         * @return Success or failure (with reason) to deny the role
-         *
-         * Example Usage:
-         * // previously defined "RBACData* rbac" with proper initialization
-         * uint32 roleId = 2;
-         * if (rbac->DenyRole(roleId) == RBAC_ID_DOES_NOT_EXISTS)
-         *     TC_LOG_DEBUG(LOG_FILTER_PLAYER, "Role Id %u does not exists", roleId);
-         * @endcode
-         */
-        RBACCommandResult DenyRole(uint32 roleId, int32 realmId = 0);
-
-        /**
-         * @name RevokeRole
-         * @brief Removes a role
-         *
-         * Removes a role from the account. If realm is 0 or the role can not be removed
-         * No save to db action will be performed. Any delete operation will always affect
-         * "all realms (-1)" in addition to the realm specified
-         *
-         * Fails if role not present
-         *
-         * @param roleId role to be removed
-         * @param realmId realm affected
-         *
-         * @return Success or failure (with reason) to remove the role
-         *
-         * Example Usage:
-         * // previously defined "RBACData* rbac" with proper initialization
-         * uint32 roleId = 2;
-         * if (rbac->RevokeRole(roleId) == RBAC_OK)
-         *     TC_LOG_DEBUG(LOG_FILTER_PLAYER, "Role %u succesfully removed", roleId);
-         * @endcode
-         */
-        RBACCommandResult RevokeRole(uint32 roleId, int32 realmId = 0);
 
         /**
          * @name GrantRole
@@ -923,8 +847,8 @@ class RBACData
 
         /// Loads all permissions assigned to current account
         void LoadFromDB();
-        
-         /// Sets security level
+
+        /// Sets security level
         void SetSecurityLevel(uint8 id)
         {
             _secLevel = id;
@@ -938,7 +862,7 @@ class RBACData
         void SavePermission(uint32 role, bool granted, int32 realm);
         /// Clears roles, groups and permissions - Used for reload
         void ClearData();
-        
+
         /**
          * @name CalculateNewPermissions
          * @brief Calculates new permissions
@@ -951,6 +875,7 @@ class RBACData
         void CalculateNewPermissions();
 
         int32 GetRealmId() { return _realmId; }
+
         // Auxiliar private functions - defined to allow to maintain same code even
         // if internal structure changes.
 

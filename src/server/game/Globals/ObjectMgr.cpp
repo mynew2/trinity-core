@@ -4846,6 +4846,7 @@ void ObjectMgr::LoadSpellScriptNames()
                 TC_LOG_ERROR(LOG_FILTER_SQL, "Scriptname: `%s` spell (Id: %d) is not first rank of spell.", scriptName, fields[0].GetInt32());
                 continue;
             }
+
             while (spellInfo)
             {
                 _spellScriptsStore.insert(SpellScriptsContainer::value_type(spellInfo->Id, GetScriptId(scriptName)));
@@ -4858,8 +4859,8 @@ void ObjectMgr::LoadSpellScriptNames()
                 TC_LOG_ERROR(LOG_FILTER_SQL, "Scriptname: `%s` spell (Id: %d) is ranked spell. Perhaps not all ranks are assigned to this script.", scriptName, spellId);
 
             _spellScriptsStore.insert(SpellScriptsContainer::value_type(spellInfo->Id, GetScriptId(scriptName)));
-            }
-            
+        }
+
         ++count;
     }
     while (result->NextRow());
@@ -6711,7 +6712,7 @@ void ObjectMgr::LoadReputationRewardRate()
             TC_LOG_ERROR(LOG_FILTER_SQL, "Table reputation_reward_rate has quest_monthly_rate with invalid rate %f, skipping data for faction %u", repRate.questMonthlyRate, factionId);
             continue;
         }
-        
+
         if (repRate.questRepeatableRate < 0.0f)
         {
             TC_LOG_ERROR(LOG_FILTER_SQL, "Table reputation_reward_rate has quest_repeatable_rate with invalid rate %f, skipping data for faction %u", repRate.questRepeatableRate, factionId);

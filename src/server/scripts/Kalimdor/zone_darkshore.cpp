@@ -389,14 +389,14 @@ public:
 };
 
 /*####
-# npc_controlled_bear ÎÁÒßÂûÑÓ PART2
+# npc_controlled_bear ÃÃÃ’ÃŸÃ‚Ã»Ã‘Ã“ PART2
 ####*/
 
 enum controlled_bear
 {
     SAY_AT_COMPLETE_QUEST2118         = 0,
-    QUEST_The_plague_spread           = 2118, /*ÎÁÒßÂûÑÓ*/
-    NPC_The_plague_spread             = 3701, /*ÈøÄÉÈğ¶÷¡¤ÂÌÊ÷*/
+    QUEST_The_plague_spread           = 2118, /*ÃÃÃ’ÃŸÃ‚Ã»Ã‘Ã“*/
+    NPC_The_plague_spread             = 3701, /*ÃˆÃ¸Ã„Ã‰ÃˆÃ°Â¶Ã·Â¡Â¤Ã‚ÃŒÃŠÃ·*/
 };
 
 #define GOSSIP_The_plague_spread  "Follow me"
@@ -464,6 +464,7 @@ public:
 			SetFollowComplete();
         }
     };
+
 };
 
 void AddSC_darkshore()

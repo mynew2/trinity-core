@@ -34,7 +34,7 @@ EndContentData */
 #include "ScriptedEscortAI.h"
 #include "Player.h"
 
-//SAI´úÌæ
+//SAIÂ´ÃºÃŒÃ¦
 /*
 enum UnexpectedResults
 {
@@ -244,6 +244,6 @@ public:
 
 void AddSC_eversong_woods()
 {
-    /* new npc_apprentice_mirveda();*/ //SAI´úÌæ
+    /* new npc_apprentice_mirveda();*/ //SAIÂ´ÃºÃŒÃ¦
     new npc_infused_crystal();
 }
